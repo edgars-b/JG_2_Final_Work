@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/basket")
+@RequestMapping("/api/v1/baskets")
 public class CartProductController {
 
     private final CartProductService service;

@@ -6,4 +6,5 @@ spring:
     password: system
   jpa:
     hibernate:
+      show-sql: true
       ddl-auto: validate

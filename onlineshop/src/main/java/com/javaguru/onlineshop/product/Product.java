@@ -27,6 +27,10 @@ public class Product {
     private BigDecimal actualPrice;
     @ManyToMany(mappedBy = "products")
     private Set<ShoppingCart> carts = new HashSet<>();
+    @Column(name = "warehouse_id")
+    private Long warehouseID;
+    @Column(name = "product_availability")
+    private int productAvailability;
 
     public Long getId() {
         return id;
@@ -92,6 +96,22 @@ public class Product {
         this.carts = carts;
     }
 
+    public Long getWarehouseID() {
+        return warehouseID;
+    }
+
+    public void setWarehouseID(Long warehouseID) {
+        this.warehouseID = warehouseID;
+    }
+
+    public int getProductAvailability() {
+        return productAvailability;
+    }
+
+    public void setProductAvailability(int productAvailability) {
+        this.productAvailability = productAvailability;
+    }
+
     public void addToShoppingCart(ShoppingCart cart) {
         this.carts.add(cart);
         cart.getProducts().add(this);
@@ -125,6 +145,7 @@ public class Product {
                 ", category='" + category + '\'' +
                 ", discount=" + discount +
                 ", actualPrice=" + actualPrice +
+                ", productAvailability=" + productAvailability +
                 '}';
     }
 }

@@ -24,7 +24,9 @@ public class ProductService {
                         product.getDescription(),
                         product.getCategory(),
                         product.getDiscount(),
-                        product.getActualPrice()))
+                        product.getActualPrice(),
+                        product.getWarehouseID(),
+                        product.getProductAvailability()))
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +38,9 @@ public class ProductService {
                 product.getDescription(),
                 product.getCategory(),
                 product.getDiscount(),
-                product.getActualPrice());
+                product.getActualPrice(),
+                product.getWarehouseID(),
+                product.getProductAvailability());
     }
 
     public ProductDTO save(ProductDTO dto) {
@@ -47,6 +51,8 @@ public class ProductService {
         product.setCategory(dto.getCategory());
         product.setDiscount(dto.getDiscount());
         product.setActualPrice(dto.calculateActualPrice());
+        product.setWarehouseID(dto.getWarehouseID());
+        product.setProductAvailability(dto.getProductAvailability());
         repository.save(product);
         return new ProductDTO(product.getId(),
                 product.getName(),
@@ -54,7 +60,9 @@ public class ProductService {
                 product.getDescription(),
                 product.getCategory(),
                 product.getDiscount(),
-                product.getActualPrice());
+                product.getActualPrice(),
+                product.getWarehouseID(),
+                product.getProductAvailability());
     }
 
     public ProductDTO update(Long id, ProductDTO dto) {
@@ -65,6 +73,8 @@ public class ProductService {
         product.setCategory(dto.getCategory());
         product.setDiscount(dto.getDiscount());
         product.setActualPrice(dto.calculateActualPrice());
+        product.setWarehouseID(dto.getWarehouseID());
+        product.setProductAvailability(dto.getProductAvailability());
         repository.save(product);
         return new ProductDTO(product.getId(),
                 product.getName(),
@@ -72,10 +82,13 @@ public class ProductService {
                 product.getDescription(),
                 product.getCategory(),
                 product.getDiscount(),
-                product.getActualPrice());
+                product.getActualPrice(),
+                product.getWarehouseID(),
+                product.getProductAvailability());
     }
 
     public void delete(Long id) {
+        repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found. ID - " + id));
         repository.deleteById(id);
     }
 }

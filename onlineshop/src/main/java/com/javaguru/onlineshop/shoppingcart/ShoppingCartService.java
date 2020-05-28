@@ -42,6 +42,7 @@ public class ShoppingCartService {
     }
 
     public void delete(Long id) {
+        repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found. ID -" + id));
         repository.deleteById(id);
     }
 

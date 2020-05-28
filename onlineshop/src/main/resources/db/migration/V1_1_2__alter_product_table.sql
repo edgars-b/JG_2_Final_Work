@@ -1,0 +1,1 @@
+alter table products modify warehouse_id bigint;

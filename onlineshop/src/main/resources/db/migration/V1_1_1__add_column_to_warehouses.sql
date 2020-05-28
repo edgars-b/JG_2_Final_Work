@@ -1,0 +1,1 @@
+alter table warehouses add column occupied_capacity int;
