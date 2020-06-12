@@ -39,7 +39,7 @@ public class CartProductService {
     }
 
     public List<ProductDTO> findAllProductsInShoppingCart(@RequestParam Long id) {
-        ShoppingCart cart = shoppingCartRepository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found. ID - " + id));
+        ShoppingCart cart = shoppingCartRepository.findById(id).orElseThrow(() -> new NotFoundException("Shopping cart not found - ID: " + id));
         Long foundID = cart.getId();
         return productRepository.findAllProductsInCart(foundID)
                 .stream()
@@ -56,6 +56,6 @@ public class CartProductService {
     }
 
     public BigDecimal getTotalSumOfProductsInCart(Long id) {
-        return productRepository.getTotalSumOfProductsInCart(id).orElseThrow(() -> new NotFoundException("Not found such cart - ID: " + id));
+        return productRepository.getTotalSumOfProductsInCart(id).orElseThrow(() -> new NotFoundException("Shopping cart not found - ID: " + id));
     }
 }

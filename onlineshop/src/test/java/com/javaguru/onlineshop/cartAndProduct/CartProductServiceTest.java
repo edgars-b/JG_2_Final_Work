@@ -36,16 +36,16 @@ class CartProductServiceTest {
     void shouldAddProductToCart() {
         mockCart = createdCart();
         mockProduct = createdProduct();
-        victim.addProductToCart(mockProduct.getId(),mockCart.getId());
-        verify(victim).addProductToCart(mockProduct.getId(),mockCart.getId());
+        victim.addProductToCart(mockProduct.getId(), mockCart.getId());
+        verify(victim).addProductToCart(mockProduct.getId(), mockCart.getId());
     }
 
     @Test
     void shouldRemoveProductFromCart() {
         mockCart = createdCart();
         mockProduct = createdProduct();
-        victim.removeProductFromCart(mockProduct.getId(),mockCart.getId());
-        verify(victim).removeProductFromCart(mockProduct.getId(),mockCart.getId());
+        victim.removeProductFromCart(mockProduct.getId(), mockCart.getId());
+        verify(victim).removeProductFromCart(mockProduct.getId(), mockCart.getId());
     }
 
     @Test

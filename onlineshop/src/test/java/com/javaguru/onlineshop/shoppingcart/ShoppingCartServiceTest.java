@@ -64,11 +64,8 @@ class ShoppingCartServiceTest {
     void shouldEditCart() {
         ShoppingCart cart = createdShoppingCart();
         when(repo.findById(1L)).thenReturn(Optional.of(cart));
-
         when(repo.save(cart)).thenReturn(cart);
-
-        ShoppingCartDTO dto = new ShoppingCartDTO(cart.getId(),cart.getName());
-
+        ShoppingCartDTO dto = new ShoppingCartDTO(cart.getId(), cart.getName());
         assertThat(victim.update(1L, dto)).isEqualToComparingFieldByField(dto);
     }
 
@@ -80,7 +77,7 @@ class ShoppingCartServiceTest {
         assertFalse(repo.existsById(cart.getId()));
     }
 
-    private ShoppingCart createdShoppingCart(){
+    private ShoppingCart createdShoppingCart() {
         ShoppingCart cart = new ShoppingCart();
         cart.setName("Test name for cart");
         return cart;

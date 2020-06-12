@@ -19,11 +19,6 @@ public class WarehouseController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<WarehouseDTO> findAllWarehouses() {
-        return service.findAll();
-    }
-
     @GetMapping("/find/{id}")
     public WarehouseDTO findWarehouseByID(@PathVariable Long id){
         return service.findByID(id);

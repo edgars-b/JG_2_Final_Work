@@ -25,7 +25,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, BigDecimal regularPrice, String description, String category, BigDecimal discount, BigDecimal actualPrice,Long warehouseID, int productAvailability) {
+    public ProductDTO(Long id, String name, BigDecimal regularPrice, String description, String category, BigDecimal discount, BigDecimal actualPrice, Long warehouseID, int productAvailability) {
         this.id = id;
         this.name = name;
         this.regularPrice = regularPrice;
@@ -132,5 +132,4 @@ public class ProductDTO {
                 ", productAvailability=" + productAvailability +
                 '}';
     }
-
 }

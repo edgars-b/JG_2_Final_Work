@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.tuple;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql(value = "/scripts/products/before_add_products_to_cart.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "/scripts/products/after_delete_products_from_carts.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = "/scripts/products/before_each_test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "/scripts/products/after_each_test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Transactional
 class ProductRepositoryIntegrationTest {
 
@@ -35,9 +35,11 @@ class ProductRepositoryIntegrationTest {
                         Product::getDescription,
                         Product::getCategory,
                         Product::getDiscount,
-                        Product::getActualPrice)
-                .containsExactly(tuple(1L, "Test name", new BigDecimal("1.00"), "test description", "test category", new BigDecimal("0.00"), new BigDecimal("1.00")),
-                        tuple(2L, "Test name 2", new BigDecimal("1.00"), "test description 2", "test category 2", new BigDecimal("0.00"), new BigDecimal("1.00")));
+                        Product::getActualPrice,
+                        Product::getProductAvailability,
+                        Product::getWarehouseID)
+                .containsExactly(tuple(1L, "Test name 1", new BigDecimal("1.00"), "test description 1", "test category 1", new BigDecimal("0.00"), new BigDecimal("1.00"), 0, null),
+                        tuple(2L, "Test name 2", new BigDecimal("1.00"), "test description 2", "test category 2", new BigDecimal("0.00"), new BigDecimal("1.00"), 0, null));
     }
 
     @Test

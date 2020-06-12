@@ -9,16 +9,16 @@ public class WarehouseDTO {
     @NotEmpty(message = "Warehouse name can not be empty.")
     @Size(min = 3, message = "Warehouse name must consist at least of 3 characters.")
     private String name;
-    private int maxWarehouseCapacity;
+    private int maxCapacity;
     private int occupiedCapacity;
 
     public WarehouseDTO() {
     }
 
-    public WarehouseDTO(Long id, String name, int maxWarehouseCapacity, int occupiedCapacity) {
+    public WarehouseDTO(Long id, String name, int maxCapacity, int occupiedCapacity) {
         this.id = id;
         this.name = name;
-        this.maxWarehouseCapacity = maxWarehouseCapacity;
+        this.maxCapacity = maxCapacity;
         this.occupiedCapacity = occupiedCapacity;
     }
 
@@ -38,12 +38,12 @@ public class WarehouseDTO {
         this.name = name;
     }
 
-    public int getMaxWarehouseCapacity() {
-        return maxWarehouseCapacity;
+    public int getMaxCapacity() {
+        return maxCapacity;
     }
 
-    public void setMaxWarehouseCapacity(int maxWarehouseCapacity) {
-        this.maxWarehouseCapacity = maxWarehouseCapacity;
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
     }
 
     public int getOccupiedCapacity() {
@@ -59,7 +59,7 @@ public class WarehouseDTO {
         return "WarehouseDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", maxWarehouseCapacity=" + maxWarehouseCapacity +
+                ", maxWarehouseCapacity=" + maxCapacity +
                 ", occupiedCapacity=" + occupiedCapacity +
                 '}';
     }
