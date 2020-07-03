@@ -31,7 +31,7 @@ public class ProductService {
     }
 
     public ProductDTO findByID(Long id) {
-        Product product = repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found. ID - " + id));
+        Product product = repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found: ID - " + id));
         return new ProductDTO(product.getId(),
                 product.getName(),
                 product.getRegularPrice(),
@@ -66,7 +66,7 @@ public class ProductService {
     }
 
     public ProductDTO update(Long id, ProductDTO dto) {
-        Product product = repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found. ID - " + id));
+        Product product = repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found: ID - " + id));
         product.setName(dto.getName());
         product.setActualPrice(dto.getActualPrice());
         product.setDescription(dto.getDescription());
@@ -88,7 +88,7 @@ public class ProductService {
     }
 
     public void delete(Long id) {
-        repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found. ID - " + id));
+        repository.findById(id).orElseThrow(() -> new NotFoundException("No such product found: ID - " + id));
         repository.deleteById(id);
     }
 }

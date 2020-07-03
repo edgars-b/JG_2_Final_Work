@@ -21,7 +21,7 @@ public class WarehouseService {
     }
 
     public WarehouseDTO findByID(Long id) {
-        Warehouse warehouse = repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found. ID - " + id));
+        Warehouse warehouse = repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found: ID - " + id));
         return new WarehouseDTO(warehouse.getId(),
                 warehouse.getName(),
                 warehouse.getMaxCapacity(),
@@ -41,8 +41,8 @@ public class WarehouseService {
     }
 
     public void saveProductToWarehouse(Long productID, Long warehouseID, int amount){
-        Product foundProduct = productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found. ID - " + productID));
-        Warehouse foundWarehouse = repository.findById(warehouseID).orElseThrow(() -> new NotFoundException("No such warehouse found. ID - " + warehouseID));
+        Product foundProduct = productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found: ID - " + productID));
+        Warehouse foundWarehouse = repository.findById(warehouseID).orElseThrow(() -> new NotFoundException("No such warehouse found: ID - " + warehouseID));
         foundProduct.setProductAvailability(amount);
         foundProduct.setWarehouseID(foundWarehouse.getId());
         foundWarehouse.getProducts().add(foundProduct);
@@ -50,7 +50,7 @@ public class WarehouseService {
     }
 
     public WarehouseDTO update(Long id, WarehouseDTO dto) {
-        Warehouse warehouse = repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found. ID - " + id));
+        Warehouse warehouse = repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found: ID - " + id));
         warehouse.setName(dto.getName());
         warehouse.setMaxCapacity(dto.getMaxCapacity());
         warehouse.setOccupiedCapacity(dto.getOccupiedCapacity());
@@ -62,7 +62,7 @@ public class WarehouseService {
     }
 
     public void delete(Long id) {
-        repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found. ID - " + id));
+        repository.findById(id).orElseThrow(() -> new NotFoundException("No such warehouse found: ID - " + id));
         repository.deleteById(id);
     }
 
@@ -82,13 +82,13 @@ public class WarehouseService {
     }
 
     public int showProductAvailability(Long productID, Long warehouseID) {
-        productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found. ID - " + productID));
+        productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found: ID - " + productID));
         return repository.showProductAvailability(productID, warehouseID);
     }
 
     public void removeProductFromWarehouse(Long productID, Long warehouseID) {
-        Product product = productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found. ID - " + productID));
-        Warehouse warehouse = repository.findById(warehouseID).orElseThrow(() -> new NotFoundException("No such warehouse found ID - " + warehouseID));
+        Product product = productRepository.findById(productID).orElseThrow(() -> new NotFoundException("No such product found: ID - " + productID));
+        Warehouse warehouse = repository.findById(warehouseID).orElseThrow(() -> new NotFoundException("No such warehouse found: ID - " + warehouseID));
         warehouse.getProducts().remove(product);
         productRepository.save(product);
     }

@@ -1,10 +1,12 @@
 package com.javaguru.onlineshop.product;
 
+import com.javaguru.onlineshop.comments.Comment;
 import com.javaguru.onlineshop.shoppingcart.ShoppingCart;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,6 +33,9 @@ public class Product {
     private Long warehouseID;
     @Column(name = "product_availability")
     private int productAvailability;
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -122,17 +127,35 @@ public class Product {
         cart.getProducts().remove(this);
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id);
+        return productAvailability == product.productAvailability &&
+                Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(regularPrice, product.regularPrice) &&
+                Objects.equals(description, product.description) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(discount, product.discount) &&
+                Objects.equals(actualPrice, product.actualPrice) &&
+                Objects.equals(carts, product.carts) &&
+                Objects.equals(warehouseID, product.warehouseID) &&
+                Objects.equals(comments, product.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, regularPrice, description, category, discount, actualPrice, carts, warehouseID, productAvailability, comments);
     }
 
     @Override
