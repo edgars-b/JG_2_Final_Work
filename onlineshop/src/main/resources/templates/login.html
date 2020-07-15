@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online shop | Login </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="/css/login.css" type="text/css">
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<div class="box">
+    <h2>Login</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="inputBox">
+            <input type="text" name="username">
+            <label>Username</label>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="password">
+            <label>Password</label>
+        </div>
+        <input type="submit" value="Log In">
+    </form>
+    <a href="/api/v1/registration">Create an account</a>
+</div>
+</body>
+</html>

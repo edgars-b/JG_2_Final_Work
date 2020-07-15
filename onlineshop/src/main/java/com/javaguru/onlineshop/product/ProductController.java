@@ -31,7 +31,8 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody ProductDTO dto) {
         ProductDTO created = service.save(dto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(created.getId())
                 .toUri();
