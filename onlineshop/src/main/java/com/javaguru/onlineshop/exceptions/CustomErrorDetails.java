@@ -7,10 +7,9 @@ import java.util.Map;
 
 public class CustomErrorDetails {
 
-    private Date timestamp;
+    private final Date timestamp;
     private Map<String, String> message;
-    private HttpStatus httpStatus;
-    private String stringMessage;
+    private final HttpStatus httpStatus;
 
     public CustomErrorDetails(Date timestamp, Map<String, String> message, HttpStatus httpStatus) {
         this.timestamp = timestamp;
@@ -20,7 +19,6 @@ public class CustomErrorDetails {
 
     public CustomErrorDetails(Date timestamp, String stringMessage, HttpStatus httpStatus) {
         this.timestamp = timestamp;
-        this.stringMessage = stringMessage;
         this.httpStatus = httpStatus;
     }
 

@@ -1,0 +1,23 @@
+body {
+    background-color: #FFF0D7;
+    font-family: "Poppins" , sans-serif;
+}
+
+.body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    left: 95%;
+    position: absolute;
+}

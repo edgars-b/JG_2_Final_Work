@@ -23,7 +23,7 @@ public class ShoppingCartService {
     }
 
     public ShoppingCartDTO findByID(Long id) {
-        ShoppingCart cart = repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found. ID - " + id));
+        ShoppingCart cart = repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found: ID - " + id));
         return new ShoppingCartDTO(cart.getId(), cart.getName());
     }
 
@@ -35,13 +35,14 @@ public class ShoppingCartService {
     }
 
     public ShoppingCartDTO update(Long id, ShoppingCartDTO dto) {
-        ShoppingCart cart = repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found. ID -" + id));
+        ShoppingCart cart = repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found: ID -" + id));
         cart.setName(dto.getName());
         repository.save(cart);
         return new ShoppingCartDTO(cart.getId(), cart.getName());
     }
 
     public void delete(Long id) {
+        repository.findById(id).orElseThrow(() -> new NotFoundException("No such cart found: ID -" + id));
         repository.deleteById(id);
     }
 

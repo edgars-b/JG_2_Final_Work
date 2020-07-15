@@ -38,14 +38,22 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(Exception.class)
     protected final ResponseEntity<Object> handleExceptions(Exception ex){
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
-        CustomErrorDetails details = new CustomErrorDetails(new Date(), errors, badRequest);
+        String message = ex.getMessage();
+        if(message.equals("")){
+            message = "No message found.";
+        }
+        CustomErrorDetails details = new CustomErrorDetails(new Date(), message, badRequest);
         return new ResponseEntity<>(details, badRequest);
     }
 
     @ExceptionHandler(NotFoundException.class)
     protected ResponseEntity<Object> handleNotFound(NotFoundException ex) {
         HttpStatus notFound = HttpStatus.NOT_FOUND;
-        CustomErrorDetails details = new CustomErrorDetails(new Date(), ex.getMessage(), notFound);
+        String message = ex.getMessage();
+        if(message.equals("")){
+            message = "No message found.";
+        }
+        CustomErrorDetails details = new CustomErrorDetails(new Date(), message, notFound);
         return new ResponseEntity<>(details, notFound);
     }
 

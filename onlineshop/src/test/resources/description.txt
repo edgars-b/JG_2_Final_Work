@@ -1,0 +1,3 @@
+Connects to real database and tests all layers.
+
+scripts folder is used to drop keys and truncate tables of database.

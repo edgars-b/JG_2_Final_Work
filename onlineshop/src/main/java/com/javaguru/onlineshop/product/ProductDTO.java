@@ -18,11 +18,14 @@ public class ProductDTO {
     @Max(value = 100, message = "Discount must be 100 or less")
     private BigDecimal discount;
     private BigDecimal actualPrice;
+    private Long warehouseID;
+    @PositiveOrZero(message = "Product availability cannot be negative")
+    private int productAvailability;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, BigDecimal regularPrice, String description, String category, BigDecimal discount, BigDecimal actualPrice) {
+    public ProductDTO(Long id, String name, BigDecimal regularPrice, String description, String category, BigDecimal discount, BigDecimal actualPrice, Long warehouseID, int productAvailability) {
         this.id = id;
         this.name = name;
         this.regularPrice = regularPrice;
@@ -30,6 +33,8 @@ public class ProductDTO {
         this.category = category;
         this.discount = discount;
         this.actualPrice = actualPrice;
+        this.warehouseID = warehouseID;
+        this.productAvailability = productAvailability;
     }
 
     public Long getId() {
@@ -88,6 +93,22 @@ public class ProductDTO {
         this.actualPrice = actualPrice;
     }
 
+    public Long getWarehouseID() {
+        return warehouseID;
+    }
+
+    public void setWarehouseID(Long warehouseID) {
+        this.warehouseID = warehouseID;
+    }
+
+    public int getProductAvailability() {
+        return productAvailability;
+    }
+
+    public void setProductAvailability(int productAvailability) {
+        this.productAvailability = productAvailability;
+    }
+
     public BigDecimal calculateActualPrice() {
         if (discount.equals(BigDecimal.ZERO)) {
             return actualPrice = regularPrice;
@@ -108,7 +129,7 @@ public class ProductDTO {
                 ", category='" + category + '\'' +
                 ", discount=" + discount +
                 ", actualPrice=" + actualPrice +
+                ", productAvailability=" + productAvailability +
                 '}';
     }
-
 }
