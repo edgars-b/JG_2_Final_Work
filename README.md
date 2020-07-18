@@ -15,6 +15,7 @@
 - [x] Mysql Database
 - [x] JUnit
 - [x] Spring MVC
+- [x] Spring JPA
 - [x] REST api
 - [ ] Spring Security
 - [ ] Thymeleaf
