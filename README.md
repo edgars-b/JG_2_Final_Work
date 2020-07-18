@@ -1,7 +1,7 @@
 # Online Shop Java project
 
-**Building slowly my project after finishing Java courses.**
-**Keeping in mind best RESTful practices**
+**Building slowly my project after finishing Java courses. Little bit of web page styling using CSS**
+**Keeping in mind best RESTful practices!**
 
 ### At the moment I`m introducing:
 
