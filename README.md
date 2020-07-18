@@ -1,5 +1,4 @@
 # Online Shop Java project
-
 ---
 
 **Building slowly my project after finishing Java courses.**
