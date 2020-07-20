@@ -2,11 +2,14 @@ package com.javaguru.onlineshop.user.login;
 
 import com.javaguru.onlineshop.user.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.Collections;
 
 @RestController
@@ -51,14 +54,14 @@ public class UserLoginController {
         return view;
     }
 
-//    @PostMapping("/save")
-//    public ResponseEntity<Void> save(@Valid @RequestBody UserLoginDTO dto){
-//        UserLoginDTO created = service.save(dto);
-//        URI location = ServletUriComponentsBuilder
-//                .fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand()
-//                .toUri();
-//        return ResponseEntity.created(location).build();
-//    }
+    @PostMapping("/save")
+    public ResponseEntity<Void> save(@Valid @RequestBody UserLoginDTO dto){
+        UserLoginDTO created = service.save(dto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand()
+                .toUri();
+        return ResponseEntity.created(location).build();
+    }
 }

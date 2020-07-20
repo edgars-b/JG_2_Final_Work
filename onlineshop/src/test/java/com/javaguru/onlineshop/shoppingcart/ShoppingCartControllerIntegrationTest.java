@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // for @BeforeAll setUp() to not male it static
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // needed for @BeforeAll setUp() so not to make it static
 @WithMockUser(username = "test login", roles = {"ADMIN"})
 class ShoppingCartControllerIntegrationTest {
 

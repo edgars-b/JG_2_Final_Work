@@ -88,8 +88,8 @@ class ProductServiceTest {
         Product product = createdProduct();
         when(repo.findById(1L)).thenReturn(Optional.of(product));
         victim.findByID(1L);
-        assertThat(victim.findByID(1L)).isEqualToComparingFieldByField(product);
-        verify(repo, times(2)).findById(1L);  // Find by ID called 2 times in this method
+        assertThat(victim.findByID(1L)).isEqualToComparingFieldByField(product);  // Find by ID called 1st time in this method
+        verify(repo, times(2)).findById(1L);  // Find by ID called 2nd time in this method
     }
 
     @Test

@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // for @BeforeAll setUp() to not male it static
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // needed for @BeforeAll setUp() so not to make it static
 @WithMockUser(username = "test login", roles = {"ADMIN"})
 class ProductControllerIntegrationTest {
 
@@ -60,9 +60,7 @@ class ProductControllerIntegrationTest {
     @Sql(value = "/scripts/products/before_each_test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = "/scripts/products/after_each_test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void shouldSaveProduct() throws Exception {
-        mock.perform(post("/api/v1/products").with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(createProductJSON()))
+        mock.perform(post("/api/v1/products").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(createProductJSON()))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", endsWith("/api/v1/products/3"))); // @Sql before already inserted 2 objects so expecting endsWith id=3
@@ -73,8 +71,7 @@ class ProductControllerIntegrationTest {
     @Sql(value = "/scripts/products/after_each_test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void shouldFindProductByID() throws Exception {
 
-        mock.perform(get("/api/v1/products/1"))
-                .andDo(print())
+        mock.perform(get("/api/v1/products/1").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Test name 1"))
@@ -91,8 +88,7 @@ class ProductControllerIntegrationTest {
     @Sql(value = "/scripts/products/before_each_test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = "/scripts/products/after_each_test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void shouldFindAllProducts() throws Exception {
-        mock.perform(get("/api/v1/products"))
-                .andDo(print())
+        mock.perform(get("/api/v1/products").with(csrf()))
                 .andExpect(status().isOk());
         List<Product> list = victim.findAll();
         assertThat(list).extracting(Product::getId,
@@ -113,7 +109,6 @@ class ProductControllerIntegrationTest {
     @Sql(value = "/scripts/products/after_each_test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void shouldDeleteProductByID() throws Exception {
         mock.perform(delete("/api/v1/products/1").with(csrf()))
-                .andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -124,7 +119,6 @@ class ProductControllerIntegrationTest {
         mock.perform(put("/api/v1/products/1").with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(createProductJSON()))
-                .andDo(print())
                 .andExpect(status().isOk());
     }
 

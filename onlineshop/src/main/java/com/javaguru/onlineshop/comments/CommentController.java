@@ -20,17 +20,17 @@ public class CommentController {
     }
 
     @GetMapping
-    public List<CommentDTO> findAll(){
+    public List<CommentDTO> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public CommentDTO findByID(@PathVariable Long id){
+    public CommentDTO findByID(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody CommentDTO dto){
+    public ResponseEntity<Void> save(@Valid @RequestBody CommentDTO dto) {
         CommentDTO created = service.save(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -40,17 +40,12 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public void editByID(@PathVariable Long id, @Valid @RequestBody CommentDTO dto){
+    public void editByID(@PathVariable Long id, @Valid @RequestBody CommentDTO dto) {
         service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteByID(@PathVariable Long id){
+    public void deleteByID(@PathVariable Long id) {
         service.delete(id);
-    }
-
-    @PostMapping("/{commentID}/product/{productID}")
-    public void addCommentToProduct(@PathVariable Long commentID, @PathVariable Long productID){
-        service.addCommentToProduct(commentID, productID);
     }
 }

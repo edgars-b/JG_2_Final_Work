@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @Sql(value = "/scripts/carts_products/before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/scripts/carts_products/after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)  // needed for @BeforeAll setUp() so not to make it static
 @WithMockUser(username = "test login", roles = {"ADMIN"})
 class CartProductControllerIntegrationTest {
 

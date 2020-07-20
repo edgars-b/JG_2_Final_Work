@@ -1,7 +1,6 @@
 package com.javaguru.onlineshop.comments;
 
 import com.javaguru.onlineshop.exceptions.NotFoundException;
-import com.javaguru.onlineshop.product.Product;
 import com.javaguru.onlineshop.product.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -64,19 +63,5 @@ public class CommentService {
     public void delete(Long id) {
         repo.findById(id).orElseThrow(() -> new NotFoundException("No such comment found: ID - " + id));
         repo.deleteById(id);
-    }
-
-    public void addCommentToProduct(Long commentID, Long productID) {
-        Comment comment = repo.findById(commentID).orElseThrow(() -> new NotFoundException("No such comment found: ID - " + commentID));
-        Product product = productRepo.findById(productID).orElseThrow(() -> new NotFoundException("No such product found: ID - " + productID));
-        product.getComments().add(comment);
-        repo.save(comment);
-    }
-
-    public void deleteCommentFromProduct(Long commentID, Long productID) {
-        Comment comment = repo.findById(commentID).orElseThrow(() -> new NotFoundException("No such comment found: ID - " + commentID));
-        Product product = productRepo.findById(productID).orElseThrow(() -> new NotFoundException("No such product found: ID - " + productID));
-        product.getComments().remove(comment);
-        repo.deleteById(commentID);
     }
 }

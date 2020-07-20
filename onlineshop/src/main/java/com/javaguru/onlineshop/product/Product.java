@@ -5,10 +5,7 @@ import com.javaguru.onlineshop.shoppingcart.ShoppingCart;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -35,7 +32,7 @@ public class Product {
     private int productAvailability;
     @OneToMany
     @JoinColumn(name = "product_id")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -117,6 +114,16 @@ public class Product {
         this.productAvailability = productAvailability;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    //  Adding and removing things related to Product
+
     public void addToShoppingCart(ShoppingCart cart) {
         this.carts.add(cart);
         cart.getProducts().add(this);
@@ -125,14 +132,6 @@ public class Product {
     public void removeFromShoppingCart(ShoppingCart cart) {
         this.carts.remove(cart);
         cart.getProducts().remove(this);
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override
